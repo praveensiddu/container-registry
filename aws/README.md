@@ -1,4 +1,5 @@
 sudo apt-get update && sudo apt-get install docker.io -y
+
 docker ps
     6  curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
     7  cd ubuntu
