@@ -1,9 +1,9 @@
 #! /bin/bash
 sudo apt-get update && sudo apt-get install docker.io -y
-docker ps
-docker pull busybox
-docker tag busybox localhost:5000/busybox
-docker push localhost:5000/busybox
+sudo docker ps
+sudo docker pull busybox
+sudo docker tag busybox localhost:5000/busybox
+
    
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
 apt install unzip
