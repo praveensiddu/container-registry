@@ -9,6 +9,7 @@ edit
 1. 
 
 # Setup TLS
+```
 sudo docker container stop registry
 export MYDOMAIN=registry.swarchpoc.com
 export REGISTRY_STORAGE_S3_REGION=us-east-1
@@ -28,9 +29,10 @@ sudo cp /etc/letsencrypt/live/$MYDOMAIN/privkey.pem certs
 sudo chown -R `id -u` certs
 sudo service apache2 stop
 sudo update-rc.d apache2 disable
+```
 
 # 
-
+```
 sudo docker run -d -p 443:443 --restart=always --name registry \
 -e "REGISTRY_LOG_LEVEL=debug" \
 -e "REGISTRY_STORAGE=s3" \
@@ -41,8 +43,19 @@ sudo docker run -d -p 443:443 --restart=always --name registry \
   -e REGISTRY_HTTP_TLS_CERTIFICATE=/certs/fullchain.pem \
   -e REGISTRY_HTTP_TLS_KEY=/certs/privkey.pem  \
   registry:2
-
-
+```
+# Renew TLS
+1. `sudo docker container stop registry`
+1. `sudo certbot --apache`
+1. 
+   ```
+   sudo cp /etc/letsencrypt/live/registry.swarchpoc.com/fullchain.pem certs
+   sudo cp /etc/letsencrypt/live/registry.swarchpoc.com/privkey.pem certs
+   ```
+1.
+   ```
+   sudo docker run  -d -p 443:443 --restart=always --name registry -e "REGISTRY_LOG_LEVEL=debug" -e "REGISTRY_STORAGE=s3" -e "REGISTRY_STORAGE_S3_REGION=us-east-1" -e    "REGISTRY_STORAGE_S3_BUCKET=praveen-container-registry"   -v "$(pwd)"/certs:/certs   -e REGISTRY_HTTP_ADDR=0.0.0.0:443 -e     REGISTRY_HTTP_TLS_CERTIFICATE=/certs/fullchain.pem   -e REGISTRY_HTTP_TLS_KEY=/certs/privkey.pem    registry:2
+   ```
 
 
 
