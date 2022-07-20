@@ -8,9 +8,11 @@ edit
       1. attach the limited s3 access role to your instance https://icicimov.github.io/blog/docker/Docker-Private-Registry-with-S3-backend-on-AWS/
    4. bash ./registry.sh
    5. Test your registy https://docs.docker.com/registry/deploying/#copy-an-image-from-docker-hub-to-your-registry
+   6. Update security group to allow communication over port 5000
   
 
 # Setup TLS
+1. Update security group to allow communication over port 80 for apache and port 443 and 5000
 1. Register a domain in Route 53. Example swarchpoc.com
 1. Associate a elastic IP for your instance. This is required for lets encrypt to issue a certificate
 1. Create a hosted zone records https://us-east-1.console.aws.amazon.com/route53/v2/hostedzones# 
@@ -24,6 +26,7 @@ export MYDOMAIN=registry.swarchpoc.com
 export REGISTRY_STORAGE_S3_REGION=us-east-1
 export REGISTRY_STORAGE_S3_BUCKET=praveen-container-registry
 
+sudo apt install apache2
 sudo snap install core; sudo snap refresh core
 sudo apt-get remove certbot
 sudo snap install --classic certbot
