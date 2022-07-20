@@ -68,6 +68,16 @@ sudo docker run -d -p 443:443 --restart=always --name registry \
    ```
    sudo docker run  -d -p 443:443 --restart=always --name registry -e "REGISTRY_LOG_LEVEL=debug" -e "REGISTRY_STORAGE=s3" -e "REGISTRY_STORAGE_S3_REGION=us-east-1" -e    "REGISTRY_STORAGE_S3_BUCKET=praveen-container-registry"   -v "$(pwd)"/certs:/certs   -e REGISTRY_HTTP_ADDR=0.0.0.0:443 -e     REGISTRY_HTTP_TLS_CERTIFICATE=/certs/fullchain.pem   -e REGISTRY_HTTP_TLS_KEY=/certs/privkey.pem    registry:2
    ```
+## access the registry from another RHEL host
+```
+export MYDOMAIN=registry-qa.swarchpoc.com
+podman pull ubuntu:16.04
+podman tag ubuntu:16.04  $MYDOMAIN/my-ubuntu
+podman push $MYDOMAIN/my-ubuntu
+podman image rm ubuntu:16.04
+podman image rm $MYDOMAIN/my-ubuntu
+podman pull $MYDOMAIN/my-ubuntu
 
+```
 
 
