@@ -29,7 +29,7 @@ sudo apt-get remove certbot
 sudo snap install --classic certbot
 sudo ln -s /snap/bin/certbot /usr/bin/certbot
 sudo certbot --apache
-sudo ls /etc/letsencrypt/live/registry.swarchpoc.com
+sudo ls /etc/letsencrypt/live/$MYDOMAIN
 
 
 mkdir certs
