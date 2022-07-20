@@ -3,14 +3,17 @@ Step by step instructions to setup a container registry
 edit
 1. Execute the commands in https://github.com/praveensiddu/container-registry/blob/master/aws/ec2-userdata either during creation of ubuntu instance or later on command line
 1. Run docker registry with AWS S3 as backend. 
-   1. Make sure to attach the s3 access role to your instance https://icicimov.github.io/blog/docker/Docker-Private-Registry-with-S3-backend-on-AWS/
-   1. sudo ./registry.sh
-   1. Test your registy https://docs.docker.com/registry/deploying/#copy-an-image-from-docker-hub-to-your-registry
+   1. This EC2 instance needs to access aws s3. 
+      1. Either attach AmazonS3FullAccess to your instance or 
+      1. attach the limited s3 access role to your instance https://icicimov.github.io/blog/docker/Docker-Private-Registry-with-S3-backend-on-AWS/
+   4. bash ./registry.sh
+   5. Test your registy https://docs.docker.com/registry/deploying/#copy-an-image-from-docker-hub-to-your-registry
   
 
 # Setup TLS
 ```
 sudo docker container stop registry
+sudo docker container rm registry
 export MYDOMAIN=registry.swarchpoc.com
 export REGISTRY_STORAGE_S3_REGION=us-east-1
 export REGISTRY_STORAGE_S3_BUCKET=praveen-container-registry
