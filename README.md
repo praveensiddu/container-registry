@@ -11,6 +11,12 @@ edit
   
 
 # Setup TLS
+1. Register a domain in Route 53. Example swarchpoc.com
+1. Associate a elastic IP for your instance. This is required for lets encrypt to issue a certificate
+1. Create a hosted zone records https://us-east-1.console.aws.amazon.com/route53/v2/hostedzones# 
+   * select the domain you have registered 
+   * Create a A record under the domain you have registered. Example 
+   * registry-qa.swarchpoc.com	A	Simple	-	67.202.25.114
 ```
 sudo docker container stop registry
 sudo docker container rm registry
